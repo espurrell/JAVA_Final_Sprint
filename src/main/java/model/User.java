@@ -8,9 +8,6 @@ public class User { // Class for the User object
     private String role;
 
     // Constructors
-    public User() {
-        User user1 = new User(1, "ESpurrell", "password1", "ESpurrell@email.com", "user");
-    }
 
     public User(int userId, String username, String password, String email, String role) {
         this.userId = userId;
