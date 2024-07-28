@@ -9,6 +9,11 @@ public class User { // Class for the User object
 
     // Constructors
 
+    public User() {
+
+    }
+
+    // Parameterized constructor
     public User(int userId, String username, String password, String email, String role) {
         this.userId = userId;
         this.username = username;
