@@ -9,8 +9,8 @@ import java.util.List;
 public class ProductService {
     private ProductDAO productDAO;
 
-    public ProductService(ProductDAO productDAO2) {
-        this.productDAO = new ProductDAO(productDAO2);
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     public void addProduct(Product product) {

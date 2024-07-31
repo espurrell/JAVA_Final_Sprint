@@ -34,13 +34,13 @@ public class Seller extends User {
 
     public void removeProduct(int productId) {
         // Logic to remove a product
-        products.removeIf(product -> product.getId() == productId);
+        products.removeIf(product -> product.getItemId() == productId);
     }
 
     public void updateProduct(Product product) {
         // Logic to update a product
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId() == product.getId()) {
+            if (products.get(i).getItemId() == product.getItemId()) {
                 products.set(i, product);
                 break;
             }

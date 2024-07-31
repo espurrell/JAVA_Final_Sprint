@@ -8,8 +8,9 @@ import java.util.List;
 public class ProductDAO {
     private Connection connection;
 
-    public ProductDAO(ProductDAO productDAO2) {
-        this.connection = productDAO2;
+    // Constructor accepting Connection object
+    public ProductDAO(Connection connection) {
+        this.connection = connection;
     }
 
     // Add a new product

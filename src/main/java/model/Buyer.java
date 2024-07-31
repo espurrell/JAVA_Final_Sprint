@@ -2,17 +2,18 @@ package model;
 
 public class Buyer extends User {
     // Additional attributes specific to a Buyer
-    private String shippingAddress;
-    private String paymentMethod;
+    // private String shippingAddress;
+    // private String paymentMethod;
 
     // Constructor
-    public Buyer(int userId, String username, String password, String email, String shippingAddress, String paymentMethod) {
+    public Buyer(int userId, String username, String password, String email,String shippingAddress, String paymentMethod
+    ) {
         super(userId, username, password, email, "buyer");
-        this.shippingAddress = shippingAddress;
-        this.paymentMethod = paymentMethod;
+        // this.shippingAddress = shippingAddress;
+        // this.paymentMethod = paymentMethod;
     }
 
-    // Getters and Setters
+    // // Getters and Setters
     public String getShippingAddress() {
         return shippingAddress;
     }

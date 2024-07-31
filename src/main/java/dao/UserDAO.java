@@ -12,8 +12,8 @@ import model.Seller;
 public class UserDAO {
     private Connection connection;
 
-    public UserDAO(Connection connection) {
-        this.connection = connection;
+    public UserDAO(Connection connection2) {
+        this.connection = connection2;
     }
 
     public void saveUser(User user) throws SQLException {
@@ -38,16 +38,16 @@ public class UserDAO {
                         return new Buyer(
                             resultSet.getString("username"),
                             resultSet.getString("password"),
-                            resultSet.getString("email"),
-                            resultSet.getString("shipping_address"),
-                            resultSet.getString("payment_method")
+                            resultSet.getString("email")
+                            // ,resultSet.getString("shippingAddress"),
+                            // resultSet.getString("paymentMethod")
                         );
                     } else if ("seller".equals(role)) {
                         return new Seller(
                             resultSet.getString("username"),
                             resultSet.getString("password"),
-                            resultSet.getString("email"),
-                            resultSet.getString("store_name")
+                            resultSet.getString("email")
+                            // ,resultSet.getString("storeName")
                         );
                     }
                 }

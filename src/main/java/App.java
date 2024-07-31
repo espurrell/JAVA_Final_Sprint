@@ -1,7 +1,6 @@
 import model.*;
 import service.*;
 import dao.*;
-
 import java.sql.*;
 import java.util.List;
 import java.util.Scanner;
@@ -13,9 +12,18 @@ public class App { // Main class
         // Connect to the database
         connectToDatabase();
         Scanner scanner = new Scanner(System.in);
+
+        // Create DAO instances
+        UserDAO userDAO = new UserDAO(connection);
+        UserService userService = new UserService(userDAO);
+
+        ProductDAO productDAO = new ProductDAO(connection);
+        ProductService productService = new ProductService(productDAO);
+
         // Create a new UserService object
-        UserService userService = new UserService(new UserDAO(connection));
-        ProductService productService = new ProductService(new ProductDAO(connection));
+        // UserService userService = new UserService(userDAO);
+        // ProductService productService = new ProductService(productDAO);
+
         // Call the mainMenu method
         while (true) {
             System.out.println("1. Register");
@@ -93,8 +101,12 @@ public class App { // Main class
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        userService.registerUser(user);
-        System.out.println("User registered successfully!");
+        try {
+            userService.registerUser(user);
+            System.out.println("User registered successfully!");
+        } catch (SQLException e) {
+            System.out.println("Error registering user: " + e.getMessage());
+        }
     }
 
 // Method to close the connection
@@ -104,8 +116,13 @@ private static User loginUser(Scanner scanner, UserService userService) {
         System.out.println("Enter password:");
         String password = scanner.nextLine();
 
+        try {
         // Authenticate the user using UserService
         return userService.loginUser(username, password);
+        } catch (SQLException e) {
+        System.out.println("Error logging in: " + e.getMessage());
+        return null;
+        }
     }
 
     // Placeholder methods for menus (implement as needed)
