@@ -39,8 +39,7 @@ public class ProductDAO {
                         rs.getString("item_name"),
                         rs.getString("item_type"),
                         rs.getString("item_description"),
-                        rs.getInt("seller_id")
-                );
+                        rs.getInt("seller_id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,8 +86,7 @@ public class ProductDAO {
                         rs.getString("item_name"),
                         rs.getString("item_type"),
                         rs.getString("item_description"),
-                        rs.getInt("seller_id")
-                ));
+                        rs.getInt("seller_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,8 +106,7 @@ public class ProductDAO {
                         rs.getString("item_name"),
                         rs.getString("item_type"),
                         rs.getString("item_description"),
-                        rs.getInt("seller_id")
-                ));
+                        rs.getInt("seller_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

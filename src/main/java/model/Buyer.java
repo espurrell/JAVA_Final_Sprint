@@ -1,42 +1,64 @@
 package model;
 
+import service.ProductService;
+import model.Product;
+import java.util.List;
+
+// Inherit from the User class
 public class Buyer extends User {
-    // Additional attributes specific to a Buyer
-    private String shippingAddress;
-    private String paymentMethod;
 
-    // Constructor
-    public Buyer(int userId, String username, String password, String email,String shippingAddress, String paymentMethod
-    ) {
+    private ProductService productService;
+
+    // Default constructor
+    public Buyer() {
+        super(); // Call the parent class constructor
+        this.setRole("buyer");
+        this.productService = new ProductService(); // Instantiate ProductService
+    }
+
+    // Parameterized constructor
+    public Buyer(int userId, String username, String password, String email) {
         super(userId, username, password, email, "buyer");
-        this.shippingAddress = shippingAddress;
-        this.paymentMethod = paymentMethod;
+        this.productService = new ProductService(); // Instantiate ProductService
     }
 
-    // // Getters and Setters
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    // Additional methods for Buyer
+    // Method to browse products
     public void browseProducts() {
-        // Logic to browse products
+
+        List<Product> products = productService.getAllProducts();
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+        } else {
+            System.out.println("Available products:");
+            for (Product product : products) {
+                System.out.println(product);
+            }
+        }
     }
 
-    public void purchaseProduct(int productId) {
-        // Logic to purchase a product
+    // Method to view product details
+    public void viewProductDetails(int productId) {
+        // Fetch the product details using ProductService
+        Product product = productService.getItemById(productId);
+
+        // Check if the product exists
+        if (product != null) {
+            System.out.println("Product Details:");
+            System.out.println("ID: " + product.getItemId());
+            System.out.println("Name: " + product.getItemName());
+            System.out.println("Seller ID: " + product.getSellerId());
+        } else {
+            System.out.println("No product found with ID: " + productId);
+        }
+    }
+
+    // Optional: Override methods from User class if needed
+    @Override
+    public String toString() {
+        return "Buyer{" +
+                "userId=" + getUserId() +
+                ", username='" + getUsername() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                '}';
     }
 }
-

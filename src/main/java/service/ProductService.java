@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ProductService {
+
     private ProductDAO productDAO;
+
+    public ProductService() {
+        this.productDAO = new ProductDAO();
+    }
 
     public ProductService(ProductDAO productDAO) {
         this.productDAO = productDAO;
@@ -36,4 +41,10 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }
+
+    // Method to fetch a single product by ID
+    public Product getItemById(int itemId) {
+        return productDAO.getProduct(itemId);
+    }
+
 }
