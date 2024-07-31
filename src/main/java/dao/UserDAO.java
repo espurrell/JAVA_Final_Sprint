@@ -36,19 +36,16 @@ public class UserDAO {
                     String role = resultSet.getString("role");
                     if ("buyer".equals(role)) {
                         return new Buyer(
-                            resultSet.getString("username"),
-                            resultSet.getString("password"),
-                            resultSet.getString("email")
-                            // ,resultSet.getString("shippingAddress"),
-                            // resultSet.getString("paymentMethod")
-                        );
+                                1,
+                                resultSet.getString("username"),
+                                resultSet.getString("password"),
+                                resultSet.getString("email"));
                     } else if ("seller".equals(role)) {
                         return new Seller(
-                            resultSet.getString("username"),
-                            resultSet.getString("password"),
-                            resultSet.getString("email")
-                            // ,resultSet.getString("storeName")
-                        );
+                                2,
+                                resultSet.getString("username"),
+                                resultSet.getString("password"),
+                                resultSet.getString("email"));
                     }
                 }
             }
@@ -76,7 +73,4 @@ public class UserDAO {
         }
     }
 
-    
-
-    
 }
