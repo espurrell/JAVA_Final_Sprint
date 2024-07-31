@@ -44,7 +44,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.example.Main</mainClass>
+                    <mainClass>src.main</mainClass>
                     <!-- Replace com.example.Main with the fully qualified name of your main class. -->
                 </configuration>
             </plugin>

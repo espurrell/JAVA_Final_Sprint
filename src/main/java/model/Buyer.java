@@ -1,4 +1,4 @@
-
+package model;
 
 public class Buyer extends User {
     // Additional attributes specific to a Buyer
