@@ -6,8 +6,8 @@ public class Buyer extends User {
     private String paymentMethod;
 
     // Constructor
-    public Buyer(String username, String password, String email, String shippingAddress, String paymentMethod) {
-        super(username, password, email, "buyer");
+    public Buyer(int userId, String username, String password, String email, String shippingAddress, String paymentMethod) {
+        super(userId, username, password, email, "buyer");
         this.shippingAddress = shippingAddress;
         this.paymentMethod = paymentMethod;
     }

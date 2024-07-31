@@ -46,6 +46,7 @@ public class App { // Main class
                     break;
                 case 3:
                     closeConnection();
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid choice! Try again.");
@@ -54,6 +55,15 @@ public class App { // Main class
     }
 
     // Method to connect to the database
+    private static void connectToDatabase() {
+        try {
+            connection = DriverManager.getConnection("jdbc:your_database_url", "username", "password");
+        } catch (SQLException e) {
+            System.out.println("Error connecting to the database: " + e.getMessage());
+            System.exit(1); // Exit the program if the connection fails
+        }
+    }
+
     private static void registerUser(Scanner scanner, UserService userService) {
         System.out.println("Enter username:");
         String username = scanner.nextLine();
@@ -92,4 +102,33 @@ private static User loginUser(Scanner scanner, UserService userService) {
         System.out.println("Enter username:");
         String username = scanner.nextLine();
         System.out.println("Enter password:");
-        String password = scanner
+        String password = scanner.nextLine();
+
+        // Authenticate the user using UserService
+        return userService.loginUser(username, password);
+    }
+
+    // Placeholder methods for menus (implement as needed)
+    private static void buyerMenu(Scanner scanner, ProductService productService) {
+        // Implement buyer menu logic here
+    }
+
+    private static void sellerMenu(Scanner scanner, ProductService productService, User user) {
+        // Implement seller menu logic here
+    }
+
+    private static void adminMenu(Scanner scanner, UserService userService, ProductService productService) {
+        // Implement admin menu logic here
+    }
+
+    // Method to close the connection
+    private static void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing the connection: " + e.getMessage());
+            }
+        }
+    }
+}

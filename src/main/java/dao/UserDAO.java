@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.User;
+import model.Buyer;
+import model.Seller;
+
 public class UserDAO {
     private Connection connection;
 

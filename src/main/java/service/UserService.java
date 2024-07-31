@@ -3,11 +3,13 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import dao.UserDAO;
+
 public class UserService {
     private UserDAO userDAO;
 
-    public UserService(Connection connection) {
-        this.userDAO = new UserDAO(connection);
+    public UserService(UserDAO userDAO2) {
+        this.userDAO = new UserDAO(userDAO2);
     }
 
     public void registerUser(User user) throws SQLException {

@@ -9,8 +9,8 @@ public class Seller extends User {
     private List<Product> products;
 
     // Constructor
-    public Seller(String username, String password, String email) {
-        super(username, password, email, "seller");
+    public Seller(int userId, String username, String password, String email) {
+        super(userId, username, password, email, "seller");
         this.storeName = "Vintique";
         this.products = new ArrayList<>();
     }
