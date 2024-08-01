@@ -5,6 +5,13 @@ import java.sql.*;
 import java.util.List;
 import java.util.Scanner;
 
+import dao.UserDAO;
+import service.UserService;
+import dao.ProductDAO;
+import service.ProductService;
+import model.User;
+
+
 public class App { // Main class
     private static Connection connection;
 
