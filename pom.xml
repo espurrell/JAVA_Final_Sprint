@@ -18,7 +18,12 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
-        <!-- Add other dependencies here -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version> <!-- or the version you are using -->
+    </dependency>   
+
     </dependencies>
 
     <build>
@@ -36,16 +41,8 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
-                    <mainClass>src.main</mainClass>
-                    <!-- Replace com.example.Main with the fully qualified name of your main class. -->
+                    <mainClass>database.DatabaseConnection</mainClass>
                 </configuration>
             </plugin>
         </plugins>
