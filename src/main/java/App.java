@@ -89,7 +89,7 @@ public class App { // Main class
                 user = new Buyer();
                 break;
             case "seller":
-                user = new Seller();
+                user = new Seller(0, role, role, role);
                 break;
             case "admin":
                 user = new Admin();

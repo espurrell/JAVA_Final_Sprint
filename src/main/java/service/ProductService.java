@@ -11,7 +11,7 @@ public class ProductService {
     private ProductDAO productDAO;
 
     public ProductService() {
-        this.productDAO = new ProductDAO();
+        this.productDAO = new ProductDAO(null);
     }
 
     public ProductService(ProductDAO productDAO) {
