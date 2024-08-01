@@ -1,3 +1,4 @@
+database/DatabaseConnection.class
 model/Seller.class
 service/ProductService.class
 dao/ProductDAO.class
