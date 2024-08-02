@@ -4,11 +4,13 @@ import dao.ProductDAO;
 import model.Product;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
 
     private ProductDAO productDAO;
+    private Product[] products;
 
     public ProductService() {
         this.productDAO = new ProductDAO(null);
@@ -45,6 +47,17 @@ public class ProductService {
     // Method to fetch a single product by ID
     public Product getItemById(int itemId) {
         return productDAO.getProduct(itemId);
+    }
+
+    // Method to search for products by name
+    public Iterable<Product> searchProducts(String name) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getItemName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(product);
+            }
+        }
+        return result;
     }
 
 }
