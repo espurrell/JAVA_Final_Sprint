@@ -56,4 +56,10 @@ public class Product {
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ItemID: %d, Name: %s, Type: %s, Description: %s, Seller ID: %d",
+                             itemId, itemName, itemType, itemDescription, sellerId);
+    }
 }
