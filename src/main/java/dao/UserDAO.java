@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import org.mindrot.jbcrypt.BCrypt;
 import model.User;
 import model.Buyer;
 import model.Seller;
 
 public class UserDAO {
+    
     private Connection connection;
 
     public UserDAO(Connection connection2) {
@@ -17,10 +18,11 @@ public class UserDAO {
     }
 
     public void saveUser(User user) throws SQLException {
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         String query = "INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(2, hashedPassword);
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getRole());
             statement.executeUpdate();
