@@ -36,7 +36,7 @@ public class App { // Main class
 
     private static void connectToDatabase() {
         try {
-            connection = DriverManager.getConnection("jdbc:your_database_url", "username", "password");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/vintique", "postgres", "Keyin2021");
         } catch (SQLException e) {
             System.out.println("Error connecting to the database: " + e.getMessage());
             System.exit(1);

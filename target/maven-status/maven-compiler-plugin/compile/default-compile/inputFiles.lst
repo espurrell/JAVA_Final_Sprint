@@ -1,7 +1,11 @@
-/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/App.java
+/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/app/App.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/dao/ProductDAO.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/dao/UserDAO.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/database/DatabaseConnection.java
+/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/menus/AdminMenu.java
+/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/menus/BuyerMenu.java
+/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/menus/ConsoleMenu.java
+/Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/menus/SellerMenu.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/model/Admin.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/model/Buyer.java
 /Users/keyinstudent_1/Desktop/JAVA/3.0/QAP3/QAP4/JAVA_Final_Sprint/src/main/java/model/Product.java
