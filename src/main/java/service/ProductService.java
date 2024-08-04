@@ -20,19 +20,19 @@ public class ProductService {
         this.productDAO = productDAO;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(Product product) throws SQLException {
         productDAO.addProduct(product);
     }
 
-    public Product getProduct(int itemId) {
+    public Product getProduct(int itemId) throws SQLException {
         return productDAO.getProduct(itemId);
     }
 
-    public void updateProduct(Product product) {
+    public void updateProduct(Product product) throws SQLException {
         productDAO.updateProduct(product);
     }
 
-    public void deleteProduct(int itemId) {
+    public void deleteProduct(int itemId) throws SQLException {
         productDAO.deleteProduct(itemId);
     }
 

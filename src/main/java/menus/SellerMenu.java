@@ -1,7 +1,11 @@
 package menus;
 
 import service.ProductService;
+
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import model.Product;
 import model.Seller;
 import model.User;
 
@@ -55,7 +59,12 @@ public class SellerMenu {
         System.out.println("Enter product description:");
         String itemDescription = scanner.nextLine();
 
-        productService.addProduct(itemName, itemType, itemDescription, seller.getUserId());
+        Product product = new Product(0, itemName, itemType, itemDescription, seller.getUserId());
+        try {
+            productService.addProduct(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void viewProducts() {
@@ -73,7 +82,12 @@ public class SellerMenu {
         System.out.println("Enter new product description:");
         String itemDescription = scanner.nextLine();
 
-        productService.updateProduct(itemId, itemName, itemType, itemDescription, seller.getUserId());
+        Product product = new Product(itemId, itemName, itemType, itemDescription, seller.getUserId());
+        try {
+            productService.updateProduct(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void deleteProduct() {
@@ -81,6 +95,10 @@ public class SellerMenu {
         int itemId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        productService.deleteProduct(itemId, seller.getUserId());
+        try {
+            productService.deleteProduct(itemId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
