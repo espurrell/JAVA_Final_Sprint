@@ -1,6 +1,8 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import dao.UserDAO;
@@ -11,6 +13,18 @@ public class UserService {
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public User getUserById(int userId) throws SQLException {
+        return userDAO.getUserById (userId);
+    }
+    
+    public void deleteUser(int userId) throws SQLException {
+        userDAO.deleteUser(userId);
+    }
+
+    public List<User> getAllUsers() throws SQLException {
+        return userDAO.getAllUsers();
     }
 
     public void registerUser(User user) throws SQLException {
@@ -39,4 +53,6 @@ public class UserService {
             throw e; // re-throwing the exception for higher-level handling if needed
         }
     }
+
+
 }
