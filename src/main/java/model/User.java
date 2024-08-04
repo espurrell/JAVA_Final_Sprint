@@ -63,7 +63,26 @@ public class User { // Class for the User object
         this.role = role;
     }
 
-    // Optional: Override toString for debugging // need to look at this for correct
+    // Methods to handle actions based on user roles
+    public void handleBuyer() {
+        // Logic for buyer actions, e.g., browsing products, adding to cart, etc.
+        System.out.println("Handling buyer actions for " + username);
+        // Implement buyer-specific functionality here
+    }
+
+    public void handleSeller() {
+        // Logic for seller actions, e.g., adding products, viewing sales, etc.
+        System.out.println("Handling seller actions for " + username);
+        // Implement seller-specific functionality here
+    }
+
+    public void handleAdmin() {
+        // Logic for admin actions, e.g., managing users, products, etc.
+        System.out.println("Handling admin actions for " + username);
+        // Implement admin-specific functionality here
+    }
+
+    // Optional: Override toString for debugging
 
     @Override
     public String toString() {
