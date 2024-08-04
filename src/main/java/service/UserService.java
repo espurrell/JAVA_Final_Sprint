@@ -54,5 +54,8 @@ public class UserService {
         }
     }
 
+    public User logoutUser() {
+        return null;
+    }
 
 }

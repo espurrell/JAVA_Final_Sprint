@@ -22,6 +22,12 @@ public class AdminMenu {
         this.productService = productService;
     }
 
+    // Static method to display the menu
+    public static void displayMenu(Scanner scanner, UserService userService, ProductService productService) {
+        AdminMenu menu = new AdminMenu(scanner, userService, productService);
+        menu.start();
+    }
+
     public void start() {
         while (true) {
             System.out.println("1. View list of all users");

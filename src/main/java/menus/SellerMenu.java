@@ -1,6 +1,7 @@
 package menus;
 
 import service.ProductService;
+import service.UserService;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -14,13 +15,20 @@ public class SellerMenu {
     private ProductService productService;
     private Seller seller;
 
-    public SellerMenu(Scanner scanner, ProductService productService, Seller seller) {
+    public SellerMenu(Scanner scanner, Seller seller, ProductService productService) {
         this.scanner = scanner;
-        this.productService = productService;
         this.seller = seller;
+        this.productService = productService;
     }
 
-    public void start() {
+    // Static method to display the menu
+    public static void displayMenu(Scanner scanner, Seller seller, ProductService productService) {
+        SellerMenu menu = new SellerMenu(scanner, seller, productService);
+        menu.start();
+    }
+
+    public void start() 
+    {
         while (true) {
             System.out.println("1. Add a product");
             System.out.println("2. View all Seller products");

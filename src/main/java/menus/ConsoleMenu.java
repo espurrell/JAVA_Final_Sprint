@@ -95,7 +95,8 @@ public class ConsoleMenu {
             if (user != null) {
                 System.out.println("Login successful!");
                 System.out.println("Welcome, " + user.getUsername() + "!");
-                handleUserRole(user); // Handle based on role after login
+                handleUserRole(user);
+                 // Handle based on role after login
             } else {
                 System.out.println("Invalid username or password!");
             }

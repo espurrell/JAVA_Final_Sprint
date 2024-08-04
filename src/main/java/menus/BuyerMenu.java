@@ -13,6 +13,12 @@ public class BuyerMenu {
         this.productService = productService;
     }
 
+    // Static method to display the menu
+    public static void displayMenu(Scanner scanner, ProductService productService) {
+        BuyerMenu menu = new BuyerMenu(scanner, productService);
+        menu.start();
+    }
+
     public void start() {
         System.out.println("Welcome, buyer!");
         System.out.println("1. View products");

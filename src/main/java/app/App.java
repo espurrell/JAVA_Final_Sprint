@@ -10,6 +10,7 @@ import dao.ProductDAO;
 import service.ProductService;
 
 
+
 public class App { // Main class
     private static Connection connection;
 

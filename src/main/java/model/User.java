@@ -1,5 +1,13 @@
 package model; // Package for the class
 
+import java.util.Scanner;
+
+import menus.AdminMenu;
+import menus.BuyerMenu;
+import menus.SellerMenu;
+import service.ProductService;
+import service.UserService;
+
 public class User { // Class for the User object
     private int userId;
     private String username;
@@ -64,23 +72,26 @@ public class User { // Class for the User object
     }
 
     // Methods to handle actions based on user roles
-    public void handleBuyer() {
-        // Logic for buyer actions, e.g., browsing products, adding to cart, etc.
-        System.out.println("Handling buyer actions for " + username);
-        // Implement buyer-specific functionality here
-    }
+    public void handleBuyer(ProductService productService) {
+        Scanner scanner = new Scanner(System.in);
+            
+                BuyerMenu.displayMenu(scanner, productService);
+                System.out.println("Handling buyer actions for " + username);
+            } 
+        
 
-    public void handleSeller() {
-        // Logic for seller actions, e.g., adding products, viewing sales, etc.
-        System.out.println("Handling seller actions for " + username);
-        // Implement seller-specific functionality here
-    }
+        public void handleSeller(Seller seller, ProductService productService) {
+            Scanner scanner = new Scanner(System.in);
+            SellerMenu.displayMenu(scanner, seller, productService);
+            System.out.println("Handling seller actions for " + username);
+            }
+        
 
-    public void handleAdmin() {
-        // Logic for admin actions, e.g., managing users, products, etc.
-        System.out.println("Handling admin actions for " + username);
-        // Implement admin-specific functionality here
-    }
+        public void handleAdmin(UserService userService, ProductService productService) {
+            Scanner scanner = new Scanner(System.in);
+            AdminMenu.displayMenu(scanner, userService, productService);
+            System.out.println("Handling admin actions for " + username);
+            } 
 
     // Optional: Override toString for debugging
 
