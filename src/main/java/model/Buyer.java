@@ -4,6 +4,8 @@ import service.ProductService;
 import model.Product;
 import java.util.List;
 import java.sql.Connection;
+import java.sql.SQLException;
+import dao.ProductDAO;
 
 // Inherit from the User class
 public class Buyer extends User {
@@ -14,13 +16,15 @@ public class Buyer extends User {
     public Buyer(Connection connection) {
         super(); // Call the parent class constructor
         this.setRole("buyer");
-        this.productService = new ProductService(connection); // Instantiate ProductService
+        ProductDAO productDAO = new ProductDAO(connection); // Instantiate ProductDAO with connection
+        this.productService = new ProductService(productDAO);
     }
 
     // Parameterized constructor
     public Buyer(int userId, String username, String password, String email, Connection connection) {
         super(userId, username, password, email, "buyer");
-        this.productService = new ProductService(connection); // Instantiate ProductService
+        ProductDAO productDAO = new ProductDAO(connection); // Instantiate ProductDAO with connection
+        this.productService = new ProductService(productDAO); // Instantiate ProductService with ProductDAO
     }
 
     // Method to browse products
@@ -38,7 +42,7 @@ public class Buyer extends User {
     }
 
     // Method to view product details
-    public void viewProductDetails(int productId) {
+    public void viewProductDetails(int productId) throws SQLException {
         // Fetch the product details using ProductService
         Product product = productService.getItemById(productId);
 
@@ -63,3 +67,4 @@ public class Buyer extends User {
                 '}';
     }
 }
+
