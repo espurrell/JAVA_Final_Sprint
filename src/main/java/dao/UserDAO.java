@@ -65,10 +65,13 @@ public class UserDAO {
         }
 
     public void deleteUser(int userId) throws SQLException {
-            String query = "DELETE FROM users WHERE username = ?";
+            String query = "DELETE FROM users WHERE user_id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, userId);
-                statement.executeUpdate();
+                int rowsAffected = statement.executeUpdate();
+        if (rowsAffected == 0) {
+            throw new SQLException("No user found with ID: " + userId);
+        }
             }
         }
 

@@ -22,3 +22,12 @@ CREATE TABLE Products (
     seller_id INTEGER NOT NULL,
     FOREIGN KEY (seller_id) REFERENCES Users(user_id)
 );
+
+-- Table edit (to allow for Delete User)
+ALTER TABLE products
+DROP CONSTRAINT products_seller_id_fkey;
+
+ALTER TABLE products
+ADD CONSTRAINT products_seller_id_fkey
+FOREIGN KEY (seller_id) REFERENCES Users(user_id)
+ON DELETE CASCADE;
