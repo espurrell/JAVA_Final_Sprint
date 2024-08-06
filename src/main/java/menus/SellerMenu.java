@@ -105,6 +105,7 @@ public class SellerMenu {
 
         try {
             productService.deleteProduct(itemId);
+            System.out.println("Product deleted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
