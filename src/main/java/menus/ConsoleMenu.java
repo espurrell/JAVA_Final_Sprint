@@ -74,7 +74,7 @@ public class ConsoleMenu {
     private User createUserByRole(String username, String password, String email, String role) {
         switch (role.toLowerCase()) {
             case "buyer":
-                return new Buyer(0, username, password, email);
+                return new Buyer(0, username, password, email, null);
             case "seller":
                 return new Seller(0, username, password, email);
             case "admin":
@@ -95,7 +95,9 @@ public class ConsoleMenu {
             if (user != null) {
                 System.out.println("Login successful!");
                 System.out.println("Welcome, " + user.getUsername() + "!");
-                handleUserRole(user);
+                // handleUserRole(user);
+                user.handleRole(productService, userService);
+                //  changed ^
                  // Handle based on role after login
             } else {
                 System.out.println("Invalid username or password!");
@@ -105,34 +107,36 @@ public class ConsoleMenu {
         }
     }
 
-    private void handleUserRole(User user) {
-        switch (user.getRole().toLowerCase()) {
-            case "buyer":
-                handleBuyer(user);
-                break;
-            case "seller":
-                handleSeller(user);
-                break;
-            case "admin":
-                handleAdmin(user);
-                break;
-            default:
-                System.out.println("Invalid role!");
-        }
-    }
+    // private void handleUserRole(User user) {
+    //     String role = user.getRole();
 
-    private void handleBuyer(User user) {
-        System.out.println("Handling buyer actions for " + user.getUsername());
-        // Add buyer-specific actions here
-    }
+    //     switch (role.toLowerCase()) {
+    //         case "buyer":
+    //             handleBuyer(user);
+    //             break;
+    //         case "seller":
+    //             handleSeller(user);
+    //             break;
+    //         case "admin":
+    //             handleAdmin(user);
+    //             break;
+    //         default:
+    //             System.out.println("Invalid role!");
+    //     }
+    // }
 
-    private void handleSeller(User user) {
-        System.out.println("Handling seller actions for " + user.getUsername());
-        // Add seller-specific actions here
-    }
+    // private void handleBuyer(User user) {
+    //     System.out.println("Handling buyer actions for " + user.getUsername());
+    //     // Add buyer-specific actions here
+    // }
 
-    private void handleAdmin(User user) {
-        System.out.println("Handling admin actions for " + user.getUsername());
-        // Add admin-specific actions here
-    }
+    // private void handleSeller(User user) {
+    //     System.out.println("Handling seller actions for " + user.getUsername());
+    //     // Add seller-specific actions here
+    // }
+
+    // private void handleAdmin(User user) {
+    //     System.out.println("Handling admin actions for " + user.getUsername());
+    //     // Add admin-specific actions here
+    // }
 }

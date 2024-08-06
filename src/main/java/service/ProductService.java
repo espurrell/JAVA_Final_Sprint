@@ -3,6 +3,8 @@ package service;
 import dao.ProductDAO;
 import model.Product;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +12,12 @@ import java.util.List;
 public class ProductService {
 
     private ProductDAO productDAO;
+    private Connection connection;
     private Product[] products;
 
-    public ProductService() {
-        this.productDAO = new ProductDAO(null);
+    public ProductService(Connection connection) {
+        this.connection = connection;
+        this.productDAO = new ProductDAO(connection);
     }
 
     public ProductService(ProductDAO productDAO) {
@@ -50,14 +54,29 @@ public class ProductService {
     }
 
     // Method to search for products by name
-    public Iterable<Product> searchProducts(String name) {
-        List<Product> result = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getItemName().toLowerCase().contains(name.toLowerCase())) {
-                result.add(product);
-            }
+    public List<Product> searchProducts(String itemName) throws SQLException {
+        if (itemName == null || itemName.isEmpty()) {
+            throw new IllegalArgumentException("Item name cannot be null or empty");
         }
-        return result;
-    }
 
-}
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE itemName LIKE ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {statement.setString(1, "%" + itemName + "%");
+            try (ResultSet resultsSet = statement.executeQuery()) {
+                while (resultsSet.next()) {
+                    Product product = new Product(
+                            resultsSet.getInt("itemId"),
+                            resultsSet.getString("itemName"),
+                            resultsSet.getString("itemType"),
+                            resultsSet.getString("itemDescription"),
+                            resultsSet.getInt("sellerId")
+                    );
+                    products.add(product);
+                }
+        }
+        
+    }
+    return products;
+
+}}

@@ -3,6 +3,7 @@ package model;
 import service.ProductService;
 import model.Product;
 import java.util.List;
+import java.sql.Connection;
 
 // Inherit from the User class
 public class Buyer extends User {
@@ -10,16 +11,16 @@ public class Buyer extends User {
     private ProductService productService;
 
     // Default constructor
-    public Buyer() {
+    public Buyer(Connection connection) {
         super(); // Call the parent class constructor
         this.setRole("buyer");
-        this.productService = new ProductService(); // Instantiate ProductService
+        this.productService = new ProductService(connection); // Instantiate ProductService
     }
 
     // Parameterized constructor
-    public Buyer(int userId, String username, String password, String email) {
+    public Buyer(int userId, String username, String password, String email, Connection connection) {
         super(userId, username, password, email, "buyer");
-        this.productService = new ProductService(); // Instantiate ProductService
+        this.productService = new ProductService(connection); // Instantiate ProductService
     }
 
     // Method to browse products

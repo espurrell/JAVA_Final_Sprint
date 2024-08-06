@@ -31,87 +31,69 @@ public class UserDAO {
     }
 
     public User getUserByUsername(String username) throws SQLException {
-        String query = "SELECT * FROM users WHERE username = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String role = resultSet.getString("role");
-                    if ("buyer".equalsIgnoreCase(role)) {
-                        return new Buyer(
-                                resultSet.getInt("user_id"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("email"));
-                    } else if ("seller".equalsIgnoreCase(role)) {
-                        return new Seller(
-                                resultSet.getInt("user_id"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("email"));
-                    } else {
-                        return new User(
-                                resultSet.getInt("user_id"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("email"),
-                                resultSet.getString("role"));
+            String query = "SELECT * FROM users WHERE username = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, username);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String role = resultSet.getString("role");
+                        int userId = resultSet.getInt("user_id");
+                        String userPassword = resultSet.getString("password");
+                        String email = resultSet.getString("email");
+
+                        if ("buyer".equalsIgnoreCase(role)) {
+                            return new Buyer(userId, username, userPassword, email, connection);
+                        } else if ("seller".equalsIgnoreCase(role)) {
+                            return new Seller(userId, username, userPassword, email);
+                        } else {
+                            return new User(userId, username, userPassword, email, role);
+                        }
                     }
                 }
             }
+            return null;
         }
-        return null;
-    }
 
     public void updateUser(User user) throws SQLException {
-        String query = "UPDATE users SET password = ?, email = ? WHERE username = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, user.getPassword()); // Assume the password is already hashed
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getUsername());
-            statement.executeUpdate();
+            String query = "UPDATE users SET password = ?, email = ? WHERE username = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, user.getPassword()); // Assume the password is already hashed
+                statement.setString(2, user.getEmail());
+                statement.setString(3, user.getUsername());
+                statement.executeUpdate();
+            }
         }
-    }
 
     public void deleteUser(int userId) throws SQLException {
-        String query = "DELETE FROM users WHERE username = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, userId);
-            statement.executeUpdate();
+            String query = "DELETE FROM users WHERE username = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, userId);
+                statement.executeUpdate();
+            }
         }
-    }
 
-    public User getUserById(int userId) throws SQLException {
-        String query = "SELECT * FROM users WHERE user_id = ?";
-     try (PreparedStatement statement = connection.prepareStatement(query)) {
-         statement.setInt(1, userId);
-         try (ResultSet resultSet = statement.executeQuery()) {
-             if (resultSet.next()) {
-                 String role = resultSet.getString("role");
-                 if ("buyer".equalsIgnoreCase(role)) {
-                     return new Buyer(
-                             resultSet.getInt("user_id"),
-                             resultSet.getString("username"),
-                             resultSet.getString("password"),
-                             resultSet.getString("email"));
-                 } else if ("seller".equalsIgnoreCase(role)) {
-                     return new Seller(
-                             resultSet.getInt("user_id"),
-                             resultSet.getString("username"),
-                             resultSet.getString("password"),
-                             resultSet.getString("email"));
-                 } else {
-                     return new User(
-                             resultSet.getInt("user_id"),
-                             resultSet.getString("username"),
-                             resultSet.getString("password"),
-                             resultSet.getString("email"),
-                             resultSet.getString("role"));
-                 }
-             }
-         }
-     }
-     return null;
+        public User getUserById(int userId) throws SQLException {
+            String query = "SELECT * FROM users WHERE user_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, userId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String role = resultSet.getString("role");
+                        String username = resultSet.getString("username");
+                        String password = resultSet.getString("password");
+                        String email = resultSet.getString("email");
+    
+                        if ("buyer".equalsIgnoreCase(role)) {
+                            return new Buyer(userId, username, password, email, connection);
+                        } else if ("seller".equalsIgnoreCase(role)) {
+                            return new Seller(userId, username, password, email);
+                        } else {
+                            return new User(userId, username, password, email, role);
+                        }
+                    }
+                }
+            }
+         return null;
     }
 
      public List<User> getAllUsers() throws SQLException { List<User> users = new ArrayList<>();
@@ -126,7 +108,7 @@ public class UserDAO {
                              resultSet.getInt("user_id"),
                              resultSet.getString("username"),
                              resultSet.getString("password"),
-                             resultSet.getString("email"));
+                             resultSet.getString("email"), connection);
                  } else if ("seller".equalsIgnoreCase(role)) {
                      user = new Seller(
                              resultSet.getInt("user_id"),

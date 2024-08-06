@@ -71,27 +71,46 @@ public class User { // Class for the User object
         this.role = role;
     }
 
-    // Methods to handle actions based on user roles
-    public void handleBuyer(ProductService productService) {
-        Scanner scanner = new Scanner(System.in);
+    // 
+    // 
+    
+    public void handleRole(ProductService productService, UserService userService) {
+        switch (role.toLowerCase()) {
+            case "buyer":
+                BuyerMenu.displayMenu(new Scanner(System.in), productService);
+                break;
+            case "seller":
+                SellerMenu.displayMenu(new Scanner(System.in), new Seller(userId, username, password, email), productService);
+                break;
+            case "admin":
+                AdminMenu.displayMenu(new Scanner(System.in), userService, productService);
+                break;
+            default:
+                System.out.println("Invalid role: " + role);
+        }
+    }
+
+    // // Methods to handle actions based on user roles
+    // public void handleBuyer(ProductService productService) {
+    //     Scanner scanner = new Scanner(System.in);
             
-                BuyerMenu.displayMenu(scanner, productService);
-                System.out.println("Handling buyer actions for " + username);
-            } 
+    //             BuyerMenu.displayMenu(scanner, productService);
+    //             System.out.println("Handling buyer actions for " + username);
+    //         } 
         
 
-        public void handleSeller(Seller seller, ProductService productService) {
-            Scanner scanner = new Scanner(System.in);
-            SellerMenu.displayMenu(scanner, seller, productService);
-            System.out.println("Handling seller actions for " + username);
-            }
+    //     public void handleSeller(Seller seller, ProductService productService) {
+    //         Scanner scanner = new Scanner(System.in);
+    //         SellerMenu.displayMenu(scanner, seller, productService);
+    //         System.out.println("Handling seller actions for " + username);
+    //         }
         
 
-        public void handleAdmin(UserService userService, ProductService productService) {
-            Scanner scanner = new Scanner(System.in);
-            AdminMenu.displayMenu(scanner, userService, productService);
-            System.out.println("Handling admin actions for " + username);
-            } 
+    //     public void handleAdmin(UserService userService, ProductService productService) {
+    //         Scanner scanner = new Scanner(System.in);
+    //         AdminMenu.displayMenu(scanner, userService, productService);
+    //         System.out.println("Handling admin actions for " + username);
+    //         } 
 
     // Optional: Override toString for debugging
 

@@ -1,6 +1,9 @@
 package menus;
 
 import service.ProductService;
+
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import model.Product;
 
@@ -50,16 +53,22 @@ public class BuyerMenu {
 
     private void searchProducts() {
         System.out.println("Enter product name:");
-        String name = scanner.nextLine();
+        String itemName = scanner.nextLine();
 
-        Iterable<Product> products = productService.searchProducts(name);
-
-        products.forEach(System.out::println);
-    }
-
-    // Close scanner in a shutdown hook or in your application's end
-    @Override
-    protected void finalize() throws Throwable {
+            try {
+                List<Product> products = productService.searchProducts(itemName);
+                if (products.isEmpty()) {
+                    System.out.println("No products found");
+                } else {
+                    products.forEach(System.out::println);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error searching for products: " + e.getMessage());
+            }
+        }
+        // Close scanner in a shutdown hook or in your application's end
+        @Override
+        protected void finalize() throws Throwable {
         scanner.close(); // Don't forget to close the scanner when done
     }
 }
