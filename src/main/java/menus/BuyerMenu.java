@@ -23,6 +23,7 @@ public class BuyerMenu {
     }
 
     public void start() {
+        while (true) {
         System.out.println("Welcome, buyer!");
         System.out.println("1. View products");
         System.out.println("2. Search products");
@@ -37,14 +38,13 @@ public class BuyerMenu {
                 break;
             case 2:
                 searchProducts();
-
                 break;
             case 3:
-                System.exit(0);
-                break;
+                return;
             default:
                 System.out.println("Invalid choice!");
         }
+    }
     }
 
     private void viewProducts() {
